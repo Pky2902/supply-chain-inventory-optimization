@@ -23,22 +23,6 @@ Using **Python (Pandas/NumPy)**, **SQL**, **Power Query (M)**, and **Power BI (D
 ### 2. Reorder Point (ROP), EOQ & Stockout Risk Diagnostics
 ![Stockout and Reorder Alerts](assets/02_stockout_and_reorder_alerts.png)
 
-### 3. Supplier Lead Time Reliability & Carrying Cost Analysis
-![Supplier Lead Time Performance](assets/03_supplier_lead_time_performance.png)
-
----
-
-## 🧮 Core Inventory Optimization Formulas Used
-
-1. **Safety Stock ($SS$)** (with variable demand & variable lead time):
-   $$SS = Z \times \sqrt{\left(\overline{LT} \times \sigma_D^2\right) + \left(\overline{D} \times \sigma_{LT}\right)^2}$$
-
-2. **Reorder Point ($ROP$)**:
-   $$ROP = \left(\overline{D} \times \overline{LT}\right) + SS$$
-
-3. **Economic Order Quantity ($EOQ$)**:
-   $$EOQ = \sqrt{\frac{2 \times D_{\text{annual}} \times S}{H}}$$
-   *(where $D_{\text{annual}}$ = Annual Demand, $S$ = Ordering Cost per Order, and $H$ = Annual Holding Cost per Unit)*
 
 ---
 
