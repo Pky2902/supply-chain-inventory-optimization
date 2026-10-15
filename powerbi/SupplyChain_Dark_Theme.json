@@ -1,0 +1,16 @@
+{
+  "name": "SupplyChainExecutiveDark",
+  "dataColors": [
+    "#38BDF8",
+    "#22C55E",
+    "#F59E0B",
+    "#EF4444",
+    "#A855F7",
+    "#FB923C",
+    "#14B8A6",
+    "#6366F1"
+  ],
+  "background": "#0F172A",
+  "foreground": "#F8FAFC",
+  "tableAccent": "#38BDF8"
+}

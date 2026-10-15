@@ -1,0 +1,38 @@
+table Inventory
+	lineageTag: 8a9f12bc-4d12-4a8e-9b12-98c12a34e5f1
+
+	measure 'Total Inventory Value' = SUM('Inventory'[Inventory_Value_USD])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+
+	measure 'Total Annual Holding Cost' = SUM('Inventory'[Annual_Holding_Cost_USD])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+
+	measure 'Inventory Turnover Ratio' = DIVIDE(SUM('Inventory'[Annual_Consumption_Value_USD]), SUM('Inventory'[Inventory_Value_USD]), 0)
+		formatString: 0.00
+
+	measure 'SKUs Below Reorder Point' = CALCULATE(COUNTROWS('Inventory'), 'Inventory'[On_Hand_Qty] <= 'Inventory'[Reorder_Point_Units])
+		formatString: #,0
+
+	column SKU_ID
+		dataType: string
+		sourceColumn: SKU_ID
+
+	column Category
+		dataType: string
+		sourceColumn: Category
+
+	column Warehouse
+		dataType: string
+		sourceColumn: Warehouse
+
+	column Supplier
+		dataType: string
+		sourceColumn: Supplier
+
+	column Stock_Health_Status
+		dataType: string
+		sourceColumn: Stock_Health_Status
+
+	column ABC_Class
+		dataType: string
+		sourceColumn: ABC_Class

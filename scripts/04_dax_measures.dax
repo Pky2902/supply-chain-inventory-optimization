@@ -1,0 +1,60 @@
+// ============================================================================
+// SUPPLY CHAIN INVENTORY OPTIMIZATION - DAX MEASURES LIBRARY
+// ============================================================================
+
+// 1. Total Inventory Valuation ($ USD)
+Total Inventory Value = 
+SUM('Inventory'[Inventory_Value_USD])
+
+// 2. Total Annual Carrying / Holding Cost ($ USD)
+Total Annual Holding Cost = 
+SUM('Inventory'[Annual_Holding_Cost_USD])
+
+// 3. Total Annual Consumption Value ($ USD)
+Annual Demand Value = 
+SUM('Inventory'[Annual_Consumption_Value_USD])
+
+// 4. Inventory Turnover Ratio
+Inventory Turnover Ratio = 
+DIVIDE([Annual Demand Value], [Total Inventory Value], 0)
+
+// 5. Average Days of Inventory On Hand (DOI)
+Avg Days of Inventory (DOI) = 
+AVERAGE('Inventory'[Days_of_Inventory_On_Hand])
+
+// 6. Total SKUs Count
+Total SKUs = 
+COUNTROWS('Inventory')
+
+// 7. Stockout SKUs (On Hand = 0)
+Stockout SKU Count = 
+CALCULATE(
+    COUNTROWS('Inventory'),
+    'Inventory'[On_Hand_Qty] = 0
+)
+
+// 8. Stockout Rate (%)
+Stockout Rate % = 
+DIVIDE([Stockout SKU Count], [Total SKUs], 0)
+
+// 9. SKUs Requiring Reorder (At or Below ROP)
+SKUs Below Reorder Point = 
+CALCULATE(
+    COUNTROWS('Inventory'),
+    'Inventory'[On_Hand_Qty] <= 'Inventory'[Reorder_Point_Units]
+)
+
+// 10. Reorder Alert %
+Reorder Alert % = 
+DIVIDE([SKUs Below Reorder Point], [Total SKUs], 0)
+
+// 11. Trapped Capital in Overstock ($ USD)
+Excess Inventory Value = 
+SUMX(
+    FILTER('Inventory', 'Inventory'[On_Hand_Qty] > 'Inventory'[Max_Stock_Level]),
+    ('Inventory'[On_Hand_Qty] - 'Inventory'[Max_Stock_Level]) * 'Inventory'[Unit_Cost_USD]
+)
+
+// 12. Estimated EOQ Holding Cost Savings (18% Benchmark)
+Est EOQ Cost Savings = 
+[Total Annual Holding Cost] * 0.18
